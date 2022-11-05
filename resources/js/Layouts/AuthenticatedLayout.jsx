@@ -7,7 +7,12 @@ import { Head, Link } from '@inertiajs/inertia-react'
 
 export default function Authenticated({ auth, header, title, children }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
-
+  const NavItems = [
+    {
+      href: 'dashboard',
+      title: 'Dashboard',
+    },
+  ]
   return (
     <div className="min-h-screen bg-gray-100">
       {title && (
@@ -26,9 +31,11 @@ export default function Authenticated({ auth, header, title, children }) {
               </div>
 
               <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                  Dashboard
-                </NavLink>
+                {NavItems.map((item) => (
+                  <NavLink href={item.href} active={route().current(item.href)}>
+                    {item.title}
+                  </NavLink>
+                ))}
               </div>
             </div>
 
@@ -96,9 +103,11 @@ export default function Authenticated({ auth, header, title, children }) {
 
         <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
           <div className="pt-2 pb-3 space-y-1">
-            <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-              Dashboard
-            </ResponsiveNavLink>
+            {NavItems.map((item) => (
+              <ResponsiveNavLink href={route(item.href)} active={route().current(item.href)}>
+                {item.title}
+              </ResponsiveNavLink>
+            ))}
           </div>
 
           <div className="pt-4 pb-1 border-t border-gray-200">

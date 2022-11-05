@@ -16,7 +16,7 @@ export default function Guest({ title, children }) {
           </Link>
         </div>
 
-        <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-md sm:rounded-lg">
+        <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md shadow-teal-500/50 sm:max-w-md sm:rounded-lg">
           <Head>
             <title>{title}</title>
           </Head>
