@@ -1,20 +1,36 @@
-import React, { useEffect, useRef } from 'react'
+import { ChangeEventHandler, FocusEventHandler, useEffect, useRef } from 'react'
+
+interface TextInputProps {
+  type: string
+  name: string
+  value?: string | number | readonly string[]
+  className: string
+  autoComplete?: string
+  required?: boolean
+  onFocus?: FocusEventHandler
+  onBlur?: FocusEventHandler
+  isFocused?: boolean
+  handleChange: ChangeEventHandler
+  rightElement?: JSX.Element
+}
 
 export default function TextInput({
   type = 'text',
   name,
   value,
-  className,
+  className = '',
   autoComplete,
   required,
   isFocused,
+  onFocus,
+  onBlur,
   handleChange,
   rightElement,
-}) {
-  const input = useRef()
+}: TextInputProps) {
+  const input = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
-    if (isFocused) {
+    if (isFocused && input.current) {
       input.current.focus()
     }
   }, [])
@@ -32,6 +48,8 @@ export default function TextInput({
         ref={input}
         autoComplete={autoComplete}
         required={required}
+        onFocus={onFocus}
+        onBlur={onBlur}
         onChange={(e) => handleChange(e)}
       />
       {!!rightElement && rightElement}

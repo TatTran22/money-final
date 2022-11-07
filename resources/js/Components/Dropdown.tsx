@@ -1,10 +1,18 @@
-import React, { useState, useContext, Fragment } from 'react'
+import { useState, createContext, useContext, Fragment, Dispatch, SetStateAction } from 'react'
 import { Link } from '@inertiajs/inertia-react'
 import { Transition } from '@headlessui/react'
 
-const DropDownContext = React.createContext()
+const DropDownContext = createContext<{
+  open: boolean
+  setOpen: Dispatch<SetStateAction<boolean>>
+  toggleOpen: () => void
+}>({
+  open: false,
+  setOpen: () => false,
+  toggleOpen: () => {},
+})
 
-const Dropdown = ({ children }) => {
+const Dropdown = ({ children }: { children: JSX.Element }) => {
   const [open, setOpen] = useState(false)
 
   const toggleOpen = () => {
@@ -18,7 +26,7 @@ const Dropdown = ({ children }) => {
   )
 }
 
-const Trigger = ({ children }) => {
+const Trigger = ({ children }: { children: JSX.Element }) => {
   const { open, setOpen, toggleOpen } = useContext(DropDownContext)
 
   return (
@@ -30,7 +38,12 @@ const Trigger = ({ children }) => {
   )
 }
 
-const Content = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-white', children }) => {
+const Content: React.FC<{ align?: string; width?: string; contentClasses?: string; children?: JSX.Element }> = ({
+  align = 'right',
+  width = '48',
+  contentClasses = 'py-1 bg-white',
+  children,
+}) => {
   const { open, setOpen } = useContext(DropDownContext)
 
   let alignmentClasses = 'origin-top'
@@ -70,7 +83,17 @@ const Content = ({ align = 'right', width = '48', contentClasses = 'py-1 bg-whit
   )
 }
 
-const DropdownLink = ({ href, method = 'post', as = 'a', children }) => {
+const DropdownLink = ({
+  href,
+  method = 'post',
+  as = 'a',
+  children,
+}: {
+  href: string
+  method: string
+  as: string
+  children: JSX.Element | string
+}) => {
   return (
     <Link
       href={href}

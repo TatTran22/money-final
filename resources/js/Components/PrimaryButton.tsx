@@ -1,12 +1,19 @@
 import React from 'react'
 
-export default function PrimaryButton({ type = 'submit', className = '', processing, children }) {
+interface PrimaryButtonProps {
+  type?: 'submit' | 'button' | 'reset'
+  className?: string
+  processing?: boolean
+  children: JSX.Element | string
+}
+
+export default function PrimaryButton({ type = 'submit', className = '', processing, children }: PrimaryButtonProps) {
   return (
     <button
       type={type}
       className={
         `inline-flex items-center px-4 py-2 bg-emerald-600 border border-transparent rounded-md font-semibold text-xs text-gray-100 uppercase tracking-widest active:bg-emerald-800 hover:bg-emerald-700 transition ease-in-out duration-150 relative dark:bg-emerald-500 dark:text-gray-900 dark:hover:bg-emerald-400 ${
-          processing && 'opacity-25 text-emerald-600 active:text-emerald-800'
+          processing ? 'opacity-25 text-emerald-600 active:text-emerald-800' : ''
         } ` + className
       }
       disabled={processing}

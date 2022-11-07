@@ -1,10 +1,28 @@
-import React, { useState } from 'react'
+import { BaseSyntheticEvent, ChangeEventHandler, MouseEventHandler, SyntheticEvent, useState } from 'react'
 import TextInput from './TextInput'
 
-export default function PasswordInput({ name, value, className, autoComplete, required, isFocused, handleChange }) {
+interface PasswordInputProps {
+  name: string
+  value: string
+  className?: string
+  autoComplete?: string
+  required?: boolean
+  isFocused?: boolean
+  handleChange: ChangeEventHandler
+}
+
+export default function PasswordInput({
+  name,
+  value,
+  className,
+  autoComplete,
+  required,
+  isFocused,
+  handleChange,
+}: PasswordInputProps) {
   const [showPassword, setShowPassword] = useState(false)
   const [focus, setFocus] = useState(isFocused)
-  const onShowPassword = (e) => {
+  const onShowPassword: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault()
     setShowPassword((s) => !s)
   }
@@ -30,7 +48,7 @@ export default function PasswordInput({ name, value, className, autoComplete, re
           className={`items-center bg-transparent absolute right-3 top-0 bottom-0 z-10 ${
             focus ? 'text-teal-600 dark:text-teal-800' : 'text-emerald-600 dark:text-emerald-800'
           }`}
-          tabIndex="-1"
+          tabIndex={-1}
           onClick={onShowPassword}
           type="button"
         >

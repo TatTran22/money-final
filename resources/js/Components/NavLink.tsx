@@ -1,7 +1,15 @@
 import React from 'react'
 import { Link } from '@inertiajs/inertia-react'
 
-export default function NavLink({ href, active, children }) {
+export default function NavLink({
+  href,
+  active,
+  children,
+}: {
+  href: string
+  active: boolean
+  children: JSX.Element | string
+}) {
   return (
     <Link
       href={href}

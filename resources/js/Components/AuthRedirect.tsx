@@ -1,7 +1,10 @@
-import React from 'react'
 import { Link } from '@inertiajs/inertia-react'
 
-export default function AuthRedirect({ text, hrefText, href }) {
+type AuthRedirect = {
+  text?: string, hrefText: string, href: string
+}
+
+const AuthRedirect: React.FC<AuthRedirect> = ({ text, hrefText, href } ) =>{
   return (
     <div className="flex flex-col items-center justify-center mt-4 border-t border-gray-400">
       <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">
@@ -16,3 +19,5 @@ export default function AuthRedirect({ text, hrefText, href }) {
     </div>
   )
 }
+
+export default AuthRedirect

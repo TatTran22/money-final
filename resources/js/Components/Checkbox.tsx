@@ -1,6 +1,12 @@
 import React from 'react'
 
-export default function Checkbox({ name, value, handleChange }) {
+interface CheckboxProps {
+    name?: string,
+    value: number | string,
+    handleChange: React.ChangeEventHandler
+}
+
+const Checkbox: React.FC<CheckboxProps> =({ name, value, handleChange }) =>{
   return (
     <input
       type="checkbox"
@@ -11,3 +17,5 @@ export default function Checkbox({ name, value, handleChange }) {
     />
   )
 }
+
+export default Checkbox

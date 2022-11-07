@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "module": "esnext"
+  },
+  "include": [
+    "resources/js/**/*.ts",
+    "resources/js/test/**/*.ts",
+    ".eslintrc.js",
+    "resources/js/**/*.ts",
+    "resources/js/**/*.tsx",
+    "vite.config.ts"
+  ]
+}

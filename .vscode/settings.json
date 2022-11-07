@@ -1,5 +1,14 @@
 {
   "i18n-ally.localesPaths": ["lang"],
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": null
+  "eslint.enable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "workbench.editor.wrapTabs": true,
+  "cSpell.words": [
+    "laravel"
+  ]
 }

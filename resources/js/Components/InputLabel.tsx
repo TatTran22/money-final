@@ -1,6 +1,14 @@
-import React from 'react'
-
-export default function InputLabel({ forInput, value, className, children }) {
+export default function InputLabel({
+  forInput,
+  value,
+  className,
+  children,
+}: {
+  forInput: string
+  value?: string
+  className?: string
+  children?: JSX.Element
+}) {
   return (
     <label
       htmlFor={forInput}

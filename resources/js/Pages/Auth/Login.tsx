@@ -1,66 +1,52 @@
-import React, { useEffect } from 'react'
+import React, { ChangeEventHandler, FormEventHandler, useEffect } from 'react'
+import { Link, useForm } from '@inertiajs/inertia-react'
+import route from 'ziggy-js'
+import Checkbox from '@/Components/Checkbox'
 import GuestLayout from '@/Layouts/GuestLayout'
 import InputError from '@/Components/InputError'
 import InputLabel from '@/Components/InputLabel'
 import PrimaryButton from '@/Components/PrimaryButton'
 import TextInput from '@/Components/TextInput'
 import PasswordInput from '@/Components/PasswordInput'
-import { Head, Link, useForm } from '@inertiajs/inertia-react'
 import AuthRedirect from '@/Components/AuthRedirect'
 
-export default function Register() {
+export default function Login({ status, canResetPassword }) {
   const { data, setData, post, processing, errors, reset } = useForm({
-    name: '',
     email: '',
     password: '',
-    password_confirmation: '',
+    remember: '',
   })
 
   useEffect(() => {
     return () => {
-      reset('password', 'password_confirmation')
+      reset('password')
     }
   }, [])
 
-  const onHandleChange = (event) => {
+  const onHandleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value)
   }
 
-  const submit = (e) => {
+  const submit: FormEventHandler = (e) => {
     e.preventDefault()
 
-    post(route('register'))
+    post('/login')
   }
 
   return (
-    <GuestLayout>
-      <Head title="Register" />
+    <GuestLayout title="Log in">
+      {status && <div className="mb-4 text-sm font-medium text-gray-600 dark:text-gray-200">{status}</div>}
       <form onSubmit={submit}>
         <div>
-          <InputLabel forInput="name" value="Name" />
-          <TextInput
-            type="text"
-            name="name"
-            value={data.name}
-            className="block w-full mt-1"
-            autoComplete="name"
-            isFocused={true}
-            handleChange={onHandleChange}
-            required
-          />
-
-          <InputError message={errors.name} className="mt-2" />
-        </div>
-        <div className="mt-4">
           <InputLabel forInput="email" value="Email" />
           <TextInput
-            type="email"
+            type="text"
             name="email"
             value={data.email}
             className="block w-full mt-1"
             autoComplete="username"
+            isFocused={true}
             handleChange={onHandleChange}
-            required
           />
           <InputError message={errors.email} className="mt-2" />
         </div>
@@ -70,31 +56,33 @@ export default function Register() {
             name="password"
             value={data.password}
             className="block w-full mt-1"
-            autoComplete="new-password"
+            autoComplete="current-password"
             handleChange={onHandleChange}
-            required
           />
           <InputError message={errors.password} className="mt-2" />
         </div>
-        <div className="mt-4">
-          <InputLabel forInput="password_confirmation" value="Confirm Password" />
-          <PasswordInput
-            name="password_confirmation"
-            value={data.password_confirmation}
-            className="block w-full mt-1"
-            handleChange={onHandleChange}
-            required
-          />
-
-          <InputError message={errors.password_confirmation} className="mt-2" />
+        <div className="block mt-4">
+          <label className="flex items-center" htmlFor="remember">
+            <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
+            <span className="ml-2 text-sm text-gray-600 dark:text-gray-100">Remember me</span>
+          </label>
         </div>
-        <div className="flex items-center justify-center mt-8">
+        <div className="flex items-center justify-end mt-4">
+          {canResetPassword && (
+            <Link
+              href={route('password.request')}
+              className="text-sm underline text-emerald-600 dark:text-emerald-500 hover:text-emerald-800 dark:hover:text-emerald-300"
+            >
+              Forgot your password?
+            </Link>
+          )}
+
           <PrimaryButton className="ml-4" processing={processing}>
-            Register
+            Log in
           </PrimaryButton>
         </div>
       </form>
-      <AuthRedirect text="Already have an account?" hrefText="Log in" href="/login" />
+      <AuthRedirect text="Don't have an account yet?" hrefText={'Register'} href={'/register'} />
     </GuestLayout>
   )
 }
