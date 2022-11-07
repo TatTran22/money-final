@@ -10,6 +10,8 @@
     ".eslintrc.js",
     "resources/js/**/*.ts",
     "resources/js/**/*.tsx",
-    "vite.config.ts"
+    "vite.config.ts",
+    "tailwind.config.js",
+    "postcss.config.js"
   ]
 }
