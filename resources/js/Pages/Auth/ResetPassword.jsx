@@ -5,6 +5,7 @@ import InputLabel from '@/Components/InputLabel'
 import PrimaryButton from '@/Components/PrimaryButton'
 import TextInput from '@/Components/TextInput'
 import { Head, useForm } from '@inertiajs/inertia-react'
+import PasswordInput from '@/Components/PasswordInput'
 
 export default function ResetPassword({ token, email }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -53,8 +54,7 @@ export default function ResetPassword({ token, email }) {
         <div className="mt-4">
           <InputLabel forInput="password" value="Password" />
 
-          <TextInput
-            type="password"
+          <PasswordInput
             name="password"
             value={data.password}
             className="block w-full mt-1"
@@ -69,8 +69,7 @@ export default function ResetPassword({ token, email }) {
         <div className="mt-4">
           <InputLabel forInput="password_confirmation" value="Confirm Password" />
 
-          <TextInput
-            type="password"
+          <PasswordInput
             name="password_confirmation"
             value={data.password_confirmation}
             className="block w-full mt-1"

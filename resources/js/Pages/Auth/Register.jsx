@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton'
 import TextInput from '@/Components/TextInput'
 import PasswordInput from '@/Components/PasswordInput'
 import { Head, Link, useForm } from '@inertiajs/inertia-react'
+import AuthRedirect from '@/Components/AuthRedirect'
 
 export default function Register() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -34,11 +35,9 @@ export default function Register() {
   return (
     <GuestLayout>
       <Head title="Register" />
-
       <form onSubmit={submit}>
         <div>
           <InputLabel forInput="name" value="Name" />
-
           <TextInput
             type="text"
             name="name"
@@ -52,10 +51,8 @@ export default function Register() {
 
           <InputError message={errors.name} className="mt-2" />
         </div>
-
         <div className="mt-4">
           <InputLabel forInput="email" value="Email" />
-
           <TextInput
             type="email"
             name="email"
@@ -65,13 +62,10 @@ export default function Register() {
             handleChange={onHandleChange}
             required
           />
-
           <InputError message={errors.email} className="mt-2" />
         </div>
-
         <div className="mt-4">
           <InputLabel forInput="password" value="Password" />
-
           <PasswordInput
             name="password"
             value={data.password}
@@ -80,10 +74,8 @@ export default function Register() {
             handleChange={onHandleChange}
             required
           />
-
           <InputError message={errors.password} className="mt-2" />
         </div>
-
         <div className="mt-4">
           <InputLabel forInput="password_confirmation" value="Confirm Password" />
           <PasswordInput
@@ -96,21 +88,13 @@ export default function Register() {
 
           <InputError message={errors.password_confirmation} className="mt-2" />
         </div>
-
         <div className="flex items-center justify-center mt-8">
           <PrimaryButton className="ml-4" processing={processing}>
             Register
           </PrimaryButton>
         </div>
       </form>
-      <div className="flex flex-col items-center justify-center mt-4 border-t border-gray-200">
-        <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-          Already have an account?
-          <Link href="/login" className="ml-2 text-sm text-green-700 underline dark:text-green-500">
-            Log in
-          </Link>
-        </div>
-      </div>
+      <AuthRedirect text="Already have an account?" hrefText="Log in" href="/login" />
     </GuestLayout>
   )
 }

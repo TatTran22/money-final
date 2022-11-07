@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { Head, Link } from '@inertiajs/inertia-react'
 import ApplicationLogo from '@/Components/ApplicationLogo'
 import Dropdown from '@/Components/Dropdown'
 import NavLink from '@/Components/NavLink'
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink'
-import { Head, Link } from '@inertiajs/inertia-react'
+import ToggleDarkModeButton from '@/Components/ToggleDarkModeButton'
 
 export default function Authenticated({ auth, header, title, children }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false)
@@ -20,7 +21,7 @@ export default function Authenticated({ auth, header, title, children }) {
           <title>{title}</title>
         </Head>
       )}
-      <nav className="bg-white border-b border-gray-100">
+      <nav className="bg-white border-b border-gray-100 dark:bg-gray-700">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
@@ -31,8 +32,8 @@ export default function Authenticated({ auth, header, title, children }) {
               </div>
 
               <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                {NavItems.map((item) => (
-                  <NavLink href={item.href} active={route().current(item.href)}>
+                {NavItems.map((item, index) => (
+                  <NavLink href={item.href} active={route().current(item.href)} key={index}>
                     {item.title}
                   </NavLink>
                 ))}
@@ -40,6 +41,7 @@ export default function Authenticated({ auth, header, title, children }) {
             </div>
 
             <div className="hidden sm:flex sm:items-center sm:ml-6">
+              <ToggleDarkModeButton />
               <div className="relative ml-3">
                 <Dropdown>
                   <Dropdown.Trigger>
@@ -103,8 +105,8 @@ export default function Authenticated({ auth, header, title, children }) {
 
         <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
           <div className="pt-2 pb-3 space-y-1">
-            {NavItems.map((item) => (
-              <ResponsiveNavLink href={route(item.href)} active={route().current(item.href)}>
+            {NavItems.map((item, index) => (
+              <ResponsiveNavLink href={route(item.href)} active={route().current(item.href)} key={index}>
                 {item.title}
               </ResponsiveNavLink>
             ))}

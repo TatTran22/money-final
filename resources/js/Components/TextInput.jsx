@@ -9,6 +9,7 @@ export default function TextInput({
   required,
   isFocused,
   handleChange,
+  rightElement,
 }) {
   const input = useRef()
 
@@ -19,13 +20,13 @@ export default function TextInput({
   }, [])
 
   return (
-    <div className="flex flex-col items-start">
+    <div className="relative flex flex-col items-start">
       <input
         type={type}
         name={name}
         value={value}
         className={
-          `border-green-300 focus:border-teal-300 focus:ring focus:ring-teal-200 focus:ring-opacity-50 rounded-md shadow-sm ` +
+          `border-emerald-300 focus:border-teal-300 dark:focus:border-teal-600 focus:ring focus:ring-teal-200 dark:focus:ring-teal-800 focus:ring-opacity-50 rounded-md shadow-sm ` +
           className
         }
         ref={input}
@@ -33,6 +34,7 @@ export default function TextInput({
         required={required}
         onChange={(e) => handleChange(e)}
       />
+      {!!rightElement && rightElement}
     </div>
   )
 }

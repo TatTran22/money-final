@@ -6,6 +6,7 @@ import InputLabel from '@/Components/InputLabel'
 import PrimaryButton from '@/Components/PrimaryButton'
 import TextInput from '@/Components/TextInput'
 import PasswordInput from '@/Components/PasswordInput'
+import AuthRedirect from '@/Components/AuthRedirect'
 import { Link, useForm } from '@inertiajs/inertia-react'
 
 export default function Login({ status, canResetPassword }) {
@@ -33,7 +34,7 @@ export default function Login({ status, canResetPassword }) {
 
   return (
     <GuestLayout title="Log in">
-      {status && <div className="mb-4 text-sm font-medium text-green-600">{status}</div>}
+      {status && <div className="mb-4 text-sm font-medium text-gray-600 dark:text-gray-200">{status}</div>}
       <form onSubmit={submit}>
         <div>
           <InputLabel forInput="email" value="Email" />
@@ -62,12 +63,15 @@ export default function Login({ status, canResetPassword }) {
         <div className="block mt-4">
           <label className="flex items-center">
             <Checkbox name="remember" value={data.remember} handleChange={onHandleChange} />
-            <span className="ml-2 text-sm text-gray-600">Remember me</span>
+            <span className="ml-2 text-sm text-gray-600 dark:text-gray-100">Remember me</span>
           </label>
         </div>
         <div className="flex items-center justify-end mt-4">
           {canResetPassword && (
-            <Link href={route('password.request')} className="text-sm text-green-600 underline hover:text-green-900">
+            <Link
+              href={route('password.request')}
+              className="text-sm underline text-emerald-600 dark:text-emerald-500 hover:text-emerald-800 dark:hover:text-emerald-300"
+            >
               Forgot your password?
             </Link>
           )}
@@ -77,12 +81,7 @@ export default function Login({ status, canResetPassword }) {
           </PrimaryButton>
         </div>
       </form>
-      <div className="flex items-center justify-center mt-8">
-        <div className="text-sm text-gray-600 dark:text-gray-400">Don't have an account yet?</div>
-        <Link href="/register" className="ml-2 text-sm text-green-700 underline dark:text-green-500">
-          Register
-        </Link>
-      </div>
+      <AuthRedirect text="Don't have an account yet?" hrefText={'Register'} href={'/register'} />
     </GuestLayout>
   )
 }
