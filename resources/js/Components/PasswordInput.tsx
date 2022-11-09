@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, ChangeEventHandler, MouseEventHandler, SyntheticEvent, useState } from 'react'
+import { ChangeEventHandler, MouseEventHandler, useState } from 'react'
 import TextInput from './TextInput'
 
 interface PasswordInputProps {
@@ -32,7 +32,7 @@ export default function PasswordInput({
       type={showPassword ? 'text' : 'password'}
       name={name}
       value={value}
-      className={`relative ` + className}
+      className={`relative ${className ? className : ''}`}
       autoComplete={autoComplete}
       required={required}
       handleChange={handleChange}
@@ -73,6 +73,7 @@ export default function PasswordInput({
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
+              opacity={showPassword ? 0 : 1}
               stroke="currentColor"
               className="w-6 h-6"
             >

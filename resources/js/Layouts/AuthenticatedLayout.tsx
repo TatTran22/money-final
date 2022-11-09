@@ -22,6 +22,10 @@ export default function Authenticated({ auth, header, title, children }: Authent
       href: 'dashboard',
       title: 'Dashboard',
     },
+    {
+      href: 'wallets',
+      title: 'Wallets',
+    },
   ]
 
   return (
@@ -33,11 +37,11 @@ export default function Authenticated({ auth, header, title, children }: Authent
             <div className="flex">
               <div className="flex items-center shrink-0">
                 <Link href="/">
-                  <ApplicationLogo className="block w-auto text-gray-500 h-9" />
+                  <ApplicationLogo className="block w-auto text-gray-500 fill-current h-9 dark:text-gray-200" />
                 </Link>
               </div>
 
-              <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+              <div className="hidden space-x-8 sm:ml-10 sm:flex">
                 {NavItems.map((item, index) => (
                   <NavLink href={item.href} active={route().current(item.href)} key={index}>
                     {item.title}
@@ -55,10 +59,9 @@ export default function Authenticated({ auth, header, title, children }: Authent
                       <span className="inline-flex rounded-md">
                         <button
                           type="button"
-                          className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none"
+                          className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-100 dark:bg-gray-600 hover:text-gray-700 dark:hover:text-gray-50 focus:outline-none"
                         >
-                          {auth.user.name}
-
+                          {`${auth.user.first_name} ${auth.user.last_name}`}
                           <svg
                             className="ml-2 -mr-0.5 h-4 w-4"
                             xmlns="http://www.w3.org/2000/svg"
@@ -85,10 +88,9 @@ export default function Authenticated({ auth, header, title, children }: Authent
               </div>
             </div>
 
-            <div className="flex items-center -mr-2 bg-red-400 sm:hidden">
+            <div className="flex items-center -mr-2 sm:hidden">
               <button
                 type="button"
-                title="abc"
                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
                 className="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
               >
@@ -124,7 +126,7 @@ export default function Authenticated({ auth, header, title, children }: Authent
 
           <div className="pt-4 pb-1 border-t border-gray-200">
             <div className="px-4">
-              <div className="text-base font-medium text-gray-800">{auth.user.name}</div>
+              <div className="text-base font-medium text-gray-800">{`${auth.user.first_name} ${auth.user.last_name}`}</div>
               <div className="text-sm font-medium text-gray-500">{auth.user.email}</div>
             </div>
 

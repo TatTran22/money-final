@@ -1,12 +1,12 @@
 import React from 'react'
 
 interface CheckboxProps {
-    name?: string,
-    value: number | string,
-    handleChange: React.ChangeEventHandler
+  name?: string
+  value: number | string
+  handleChange: React.ChangeEventHandler
 }
 
-const Checkbox: React.FC<CheckboxProps> =({ name, value, handleChange }) =>{
+const Checkbox: React.FC<CheckboxProps> = ({ name, value, handleChange }) => {
   return (
     <input
       type="checkbox"
