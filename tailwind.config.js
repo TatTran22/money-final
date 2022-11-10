@@ -5,6 +5,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
   content: [
     './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
     './storage/framework/views/*.php',
     './resources/views/**/*.blade.php',
     './resources/js/**/*.jsx',
@@ -19,5 +20,5 @@ module.exports = {
     },
   },
   darkMode: 'class',
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/forms'), require('flowbite/plugin')],
 }

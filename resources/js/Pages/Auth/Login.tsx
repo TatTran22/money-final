@@ -31,7 +31,7 @@ export default function Login({ status, canResetPassword }: { status: string; ca
   const submit: FormEventHandler = (e) => {
     e.preventDefault()
 
-    post('/login')
+    post(route(''))
   }
 
   return (
