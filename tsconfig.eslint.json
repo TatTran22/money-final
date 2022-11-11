@@ -8,7 +8,6 @@
     "resources/js/**/*.ts",
     "resources/js/test/**/*.ts",
     ".eslintrc.js",
-    "resources/js/**/*.ts",
     "resources/js/**/*.tsx",
     "vite.config.ts",
     "tailwind.config.js",

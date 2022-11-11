@@ -1,24 +1,29 @@
+import { Box, Flex, Spacer, Text, Divider } from '@chakra-ui/react'
 import { Link } from '@inertiajs/inertia-react'
 
 type AuthRedirectProps = {
-  text?: string
+  text: string
   hrefText: string
   href: string
 }
 
 const AuthRedirect: React.FC<AuthRedirectProps> = ({ text, hrefText, href }) => {
   return (
-    <div className="flex flex-col items-center justify-center mt-4 border-t border-gray-400">
-      <div className="mt-4 text-sm text-gray-600 dark:text-gray-300">
-        {text}
-        <Link
-          href={href}
-          className="ml-2 text-sm underline text-emerald-700 dark:text-emerald-500 hover:text-emerald-800 dark:hover:text-emerald-300"
-        >
-          {hrefText}
-        </Link>
-      </div>
-    </div>
+    <Box>
+      <Flex flexDir="column" marginTop={4}>
+        <Divider orientation="horizontal" />
+        <Flex flexDir="row" marginTop={4} justify="center">
+          <Text>
+            {`${text} `}
+            <Link href={href}>
+              <Text color="brand.400" as="u">
+                {hrefText}
+              </Text>
+            </Link>
+          </Text>
+        </Flex>
+      </Flex>
+    </Box>
   )
 }
 

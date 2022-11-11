@@ -1,11 +1,8 @@
 {
-    "extends": "./tsconfig.json",
     "compilerOptions": {
-        "baseUrl": ".",
-        "composite": true,
-        "module": "ESNext",
+      "composite": true,
+      "module": "esnext",
+      "moduleResolution": "node"
     },
-    "include": [
-        "vite.config.ts"
-    ]
-}
+    "include": ["vite.config.ts"]
+  }

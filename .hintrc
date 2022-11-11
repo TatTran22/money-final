@@ -9,6 +9,8 @@
         "label": "off",
         "autocomplete-valid": "off"
       }
-    ]
+    ],
+    "typescript-config/consistent-casing": "off",
+    "typescript-config/strict": "off"
   }
 }
