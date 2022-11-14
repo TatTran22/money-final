@@ -1,20 +1,13 @@
 import React from 'react'
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-
-const Header = () => {
-  return <h2 className="text-xl font-semibold leading-tight text-gray-800">Dashboard</h2>
-}
+import AuthLayout from '@/Layouts/AuthLayout'
+import { Box, Text } from '@chakra-ui/react'
 
 export default function Dashboard({ auth, errors }: { auth: { user: User }; errors: any }) {
   return (
-    <AuthenticatedLayout auth={auth} errors={errors} header={<Header />} title="Dashboard">
-      <div className="py-12">
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-            <div className="p-6 bg-white border-b border-gray-200">You're logged in!</div>
-          </div>
-        </div>
-      </div>
-    </AuthenticatedLayout>
+    <AuthLayout auth={auth} errors={errors} title="Dashboard">
+      <Box>
+        <Text>You're logged in!</Text>
+      </Box>
+    </AuthLayout>
   )
 }

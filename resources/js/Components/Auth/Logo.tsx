@@ -1,7 +1,7 @@
 import { chakra, HTMLChakraProps } from '@chakra-ui/react'
 
 export const Logo = (props: HTMLChakraProps<'svg'>) => (
-  <chakra.svg color="accent" height="12" width="auto" viewBox="0 0 89 89" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <chakra.svg color="accent" height="10" width="auto" viewBox="0 0 89 89" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       fill="currentColor"
       fillRule="evenodd"
