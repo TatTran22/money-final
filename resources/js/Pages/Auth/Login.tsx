@@ -1,10 +1,10 @@
-import React, { ChangeEventHandler, FormEventHandler, useEffect, createRef } from 'react'
+import { ChangeEventHandler, FormEventHandler, useEffect, createRef } from 'react'
 import { Link, useForm } from '@inertiajs/inertia-react'
 import route from 'ziggy-js'
 import GuestLayout from '@/Layouts/GuestLayout'
 import { EmailField } from '@/Components/Auth/EmailField'
 import { PasswordField } from '@/Components/Auth/PasswordField'
-import { Box, Button, Checkbox, Divider, HStack, Stack, Text, useColorModeValue } from '@chakra-ui/react'
+import { Box, Button, Checkbox, Divider, Heading, HStack, Stack, Text, useColorModeValue } from '@chakra-ui/react'
 import AuthRedirect from '@/Components/AuthRedirect'
 
 export default function Login({ status, canResetPassword }: { status: string; canResetPassword: boolean }) {
@@ -29,20 +29,8 @@ export default function Login({ status, canResetPassword }: { status: string; ca
 
   const submit: FormEventHandler = (e) => {
     e.preventDefault()
-    if (emailRef.current?.value && passwordRef.current?.value) {
-      setData('email', emailRef.current.value)
-      setData('password', passwordRef.current.value)
-    }
     post(route('login'))
   }
-
-  useEffect(() => {
-    console.log(errors)
-  }, [errors])
-
-  useEffect(() => {
-    console.log(status)
-  }, [status])
 
   return (
     <GuestLayout title="Log in">
@@ -58,8 +46,11 @@ export default function Login({ status, canResetPassword }: { status: string; ca
         h="fit-content"
         bgColor="gray.200"
       >
-        {status && <Text>{status}</Text>}
         <Stack spacing="6">
+          <Heading as="h2" size="md" textColor="brand.400">
+            Log In
+          </Heading>
+          {status && <Text>{status}</Text>}
           <Stack spacing="5">
             <EmailField
               placeholder="Enter your email"

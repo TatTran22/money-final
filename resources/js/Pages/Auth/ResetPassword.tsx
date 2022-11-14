@@ -1,13 +1,11 @@
 import React, { ChangeEventHandler, FormEventHandler, useEffect } from 'react'
 import GuestLayout from '@/Layouts/GuestLayout'
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
-import PrimaryButton from '@/Components/PrimaryButton'
-import TextInput from '@/Components/TextInput'
 import { useForm } from '@inertiajs/inertia-react'
-import PasswordInput from '@/Components/PasswordInput'
 import route from 'ziggy-js'
 import AuthRedirect from '@/Components/AuthRedirect'
+import { EmailField } from '@/Components/Auth/EmailField'
+import { PasswordField } from '@/Components/Auth/PasswordField'
+import { Box, useColorModeValue, Stack, Button, Heading } from '@chakra-ui/react'
 
 export default function ResetPassword({ token, email }: { token: string; email: string }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -28,67 +26,49 @@ export default function ResetPassword({ token, email }: { token: string; email: 
     setData(event.target.name, event.target.value)
   }
 
-  const submit: FormEventHandler<HTMLFormElement> = (e) => {
+  const submit: FormEventHandler = (e) => {
     e.preventDefault()
     post(route('password.update'))
   }
 
   return (
     <GuestLayout title="Reset Password">
-      <div>
-        <form onSubmit={submit}>
-          <div>
-            <InputLabel forInput="email" value="Email" />
-
-            <TextInput
-              type="email"
-              name="email"
-              value={data.email}
-              className="block w-full mt-1"
-              autoComplete="username"
-              handleChange={onHandleChange}
-            />
-
-            <InputError message={errors.email} className="mt-2" />
-          </div>
-
-          <div className="mt-4">
-            <InputLabel forInput="password" value="Password" />
-
-            <PasswordInput
-              name="password"
-              value={data.password}
-              className="block w-full mt-1"
-              autoComplete="new-password"
-              isFocused={true}
-              handleChange={onHandleChange}
-            />
-
-            <InputError message={errors.password} className="mt-2" />
-          </div>
-
-          <div className="mt-4">
-            <InputLabel forInput="password_confirmation" value="Confirm Password" />
-
-            <PasswordInput
+      <Box
+        as="form"
+        py={{ base: '0', sm: '8' }}
+        px={{ base: '4', sm: '10' }}
+        bg={{ base: 'gray.100', sm: 'bg-surface' }}
+        boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
+        borderRadius={{ base: 'none', sm: 'xl' }}
+        onSubmit={submit}
+        w={'md'}
+        h="fit-content"
+        bgColor="gray.200"
+      >
+        <Stack spacing="6">
+          <Heading as="h2" size="md" textColor="brand.400">
+            Reset Password
+          </Heading>
+          <Stack spacing="5">
+            <EmailField value={data.email} errormsg={errors.email} />
+            <PasswordField value={data.password} onChange={onHandleChange} errormsg={errors.password} />
+            <PasswordField
+              id="password-confirm"
               name="password_confirmation"
               value={data.password_confirmation}
-              className="block w-full mt-1"
-              autoComplete="new-password"
-              handleChange={onHandleChange}
+              onChange={onHandleChange}
+              errormsg={errors.password_confirmation}
             />
+          </Stack>
 
-            <InputError message={errors.password_confirmation} className="mt-2" />
-          </div>
-
-          <div className="flex items-center justify-end mt-4">
-            <PrimaryButton className="ml-4" processing={processing}>
+          <Stack spacing="6">
+            <Button variant="primary" type="submit" isLoading={processing}>
               Reset Password
-            </PrimaryButton>
-          </div>
-        </form>
-        <AuthRedirect href="/login" hrefText="Back to login" />
-      </div>
+            </Button>
+          </Stack>
+        </Stack>
+        <AuthRedirect text="" hrefText="Back to login" href="/login" />
+      </Box>
     </GuestLayout>
   )
 }

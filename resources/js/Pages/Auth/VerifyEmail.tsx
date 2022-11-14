@@ -1,13 +1,13 @@
 import React, { FormEventHandler } from 'react'
 import GuestLayout from '@/Layouts/GuestLayout'
-import PrimaryButton from '@/Components/PrimaryButton'
 import { Link, useForm } from '@inertiajs/inertia-react'
 import route from 'ziggy-js'
+import { Box, Stack, useColorModeValue, Text, Button, Flex, Heading } from '@chakra-ui/react'
 
 export default function VerifyEmail({ status }: { status: string }) {
   const { post, processing } = useForm()
 
-  const submit: FormEventHandler<HTMLFormElement> = (e) => {
+  const submit: FormEventHandler = (e) => {
     e.preventDefault()
 
     post(route('verification.send'))
@@ -15,33 +15,41 @@ export default function VerifyEmail({ status }: { status: string }) {
 
   return (
     <GuestLayout title="Email Verification">
-      <div>
-        <div className="mb-4 text-sm leading-normal text-gray-700 dark:text-gray-100">
-          Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we
-          just emailed to you? If you didn't receive the email, we will gladly send you another.
-        </div>
-
-        {status === 'verification-link-sent' && (
-          <div className="mb-4 text-sm font-medium text-emerald-600 dark:text-emerald-400">
-            A new verification link has been sent to the email address you provided during registration.
-          </div>
-        )}
-
-        <form onSubmit={submit}>
-          <div className="flex items-center justify-between mt-4">
-            <PrimaryButton processing={processing}>Resend Verification Email</PrimaryButton>
-
-            <Link
-              href={route('logout')}
-              method="post"
-              as="button"
-              className="text-sm text-gray-600 underline hover:text-gray-900 dark:text-gray-200"
-            >
-              Log Out
+      <Box
+        as="form"
+        py={{ base: '0', sm: '8' }}
+        px={{ base: '4', sm: '10' }}
+        bg={{ base: 'gray.100', sm: 'bg-surface' }}
+        boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
+        borderRadius={{ base: 'none', sm: 'xl' }}
+        onSubmit={submit}
+        w={'md'}
+        h="fit-content"
+        bgColor="gray.200"
+      >
+        <Stack spacing="6">
+          <Heading as="h2" size="md" textColor="brand.400">
+            Email Verification
+          </Heading>
+          <Text>
+            Thanks for signing up! Before getting started, could you verify your email address by clicking on the link
+            we just emailed to you? If you didn't receive the email, we will gladly send you another.
+          </Text>
+          {status === 'verification-link-sent' && (
+            <Text>A new verification link has been sent to the email address you provided during registration.</Text>
+          )}
+          <Flex flexDirection="row" alignItems="center" justify="space-between">
+            <Button variant="primary" type="submit" isLoading={processing}>
+              Resend Verification Email
+            </Button>
+            <Link href={route('logout')} method="post">
+              <Button variant="link" colorScheme="blue" size="sm">
+                Log Out
+              </Button>
             </Link>
-          </div>
-        </form>
-      </div>
+          </Flex>
+        </Stack>
+      </Box>
     </GuestLayout>
   )
 }

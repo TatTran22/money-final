@@ -1,11 +1,9 @@
 import React, { ChangeEventHandler, FormEventHandler, useEffect } from 'react'
 import GuestLayout from '@/Layouts/GuestLayout'
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
-import PrimaryButton from '@/Components/PrimaryButton'
-import TextInput from '@/Components/TextInput'
 import { useForm } from '@inertiajs/inertia-react'
 import route from 'ziggy-js'
+import { Box, useColorModeValue, Stack, Button, Text, Heading } from '@chakra-ui/react'
+import { PasswordField } from '@/Components/Auth/PasswordField'
 
 export default function ConfirmPassword() {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -30,33 +28,38 @@ export default function ConfirmPassword() {
 
   return (
     <GuestLayout title="Confirm Password">
-      <div>
-        <div className="mb-4 text-sm text-gray-600">
-          This is a secure area of the application. Please confirm your password before continuing.
-        </div>
-        <form onSubmit={submit}>
-          <div className="mt-4">
-            <InputLabel forInput="password" value="Password" />
-
-            <TextInput
-              type="password"
-              name="password"
+      <Box
+        as="form"
+        py={{ base: '0', sm: '8' }}
+        px={{ base: '4', sm: '10' }}
+        bg={{ base: 'gray.100', sm: 'bg-surface' }}
+        boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
+        borderRadius={{ base: 'none', sm: 'xl' }}
+        onSubmit={submit}
+        w={'md'}
+        h="fit-content"
+        bgColor="gray.200"
+      >
+        <Stack spacing="6">
+          <Heading as="h2" size="md" textColor="brand.400">
+            Confirm Password
+          </Heading>
+          <Text>This is a secure area of the application. Please confirm your password before continuing.</Text>
+          <Stack spacing="5">
+            <PasswordField
+              placeholder="Enter your password"
               value={data.password}
-              className="block w-full mt-1"
-              isFocused={true}
-              handleChange={onHandleChange}
+              onChange={onHandleChange}
+              errormsg={errors.password}
             />
-
-            <InputError message={errors.password} className="mt-2" />
-          </div>
-
-          <div className="flex items-center justify-end mt-4">
-            <PrimaryButton className="ml-4" processing={processing}>
+          </Stack>
+          <Stack spacing="6">
+            <Button variant="primary" type="submit" isLoading={processing}>
               Confirm
-            </PrimaryButton>
-          </div>
-        </form>{' '}
-      </div>
+            </Button>
+          </Stack>
+        </Stack>
+      </Box>
     </GuestLayout>
   )
 }
