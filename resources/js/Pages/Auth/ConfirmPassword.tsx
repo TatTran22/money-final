@@ -38,7 +38,6 @@ export default function ConfirmPassword() {
         onSubmit={submit}
         w={'md'}
         h="fit-content"
-        bgColor="gray.200"
       >
         <Stack spacing="6">
           <Heading as="h2" size="md" textColor="brand.400">
