@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Head } from '@inertiajs/inertia-react'
-import { Flex } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import Footer from '@/Components/Layout/Footer'
 import NavBar from '@/Components/Layout/Navbar'
 
@@ -8,27 +8,25 @@ interface AuthLayoutProps {
   auth: { user: User }
   errors: any
   title: string
-  children: string | JSX.Element
+  children?: JSX.Element
+  navChild?: JSX.Element
 }
 
-export default function AuthLayout({ title, children, auth, errors }: AuthLayoutProps) {
+export default function AuthLayout({ title, children, auth, errors, navChild }: AuthLayoutProps) {
   useEffect(() => {
-    console.log(errors)
-    return () => {}
+    if (errors.length) console.log(errors)
   }, [errors])
 
   return (
-    <Fragment>
+    <Box bg="bg-surface">
       <Head title={title} />
-      <Flex minH="full" flexDirection={'column'} h="calc(100vh)">
-        <NavBar user={auth.user} navChildren={title} />
-
-        <Flex justify="center" h="full" paddingTop="16">
+      <Flex minH="calc(100vh)" flexDirection={'column'} h="fit-content" position="relative">
+        <NavBar user={auth.user} navChildren={navChild} title={title} />
+        <Flex bg="bg-subtle" flex={1}>
           {children}
         </Flex>
-
         <Footer />
       </Flex>
-    </Fragment>
+    </Box>
   )
 }

@@ -10,8 +10,8 @@ export default function Guest({ title, children }: { title: string; children: st
   return (
     <Fragment>
       <Head title={title} />
-      <Flex minH="full" flexDirection={'column'} h="calc(100vh)">
-        <Box as="section" pb={{ base: '4', md: '6' }}>
+      <Flex minH="calc(100vh)" flexDirection={'column'} h="fit-content">
+        <Box as="section" pb={{ base: '4', md: '6' }} minH="fit-content">
           <Box as="nav" bg="bg-surface" boxShadow={useColorModeValue('sm', 'sm-dark')}>
             <Container py={{ base: '4', lg: '5' }}>
               <HStack spacing="10" justify="space-between">
@@ -21,13 +21,13 @@ export default function Guest({ title, children }: { title: string; children: st
             </Container>
           </Box>
         </Box>
-        <Flex as={'main'} flexGrow={1}>
-          <Flex flexGrow={1} justify="center" alignItems="start">
-            <Heading as="h2" marginTop="24">
+        <Flex as={'main'} flexFlow="wrap" justify="center">
+          <Flex flex="0 0 50%" justify="center" alignItems="start">
+            <Heading as="h2" marginTop={{ base: '2', md: '24' }}>
               <Text color="brand.400">Simple way</Text> to manage <Text color="brand.400">personal finances</Text>
             </Heading>
           </Flex>
-          <Flex justify="center" w="2xl" h="full" paddingTop="16">
+          <Flex flex="0 0 50%" justify="center" alignItems="center" flexBasis="1/2" h="full">
             {children}
           </Flex>
         </Flex>

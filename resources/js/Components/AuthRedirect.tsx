@@ -1,4 +1,4 @@
-import { Box, Flex, Spacer, Text, Divider } from '@chakra-ui/react'
+import { Box, Flex, Text, Divider } from '@chakra-ui/react'
 import { Link } from '@inertiajs/inertia-react'
 
 type AuthRedirectProps = {
