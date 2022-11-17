@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/extensions
 import './bootstrap.js'
-import '../css/app.css'
+import '@fontsource/inter/variable.css'
 
 import { createRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/inertia-react'
@@ -8,7 +8,6 @@ import { InertiaProgress } from '@inertiajs/progress'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { ChakraProvider } from '@chakra-ui/react'
 import { theme } from '@/theme'
-
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
 
 createInertiaApp({
