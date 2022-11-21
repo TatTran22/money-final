@@ -86,7 +86,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getWallets(): HasMany
     {
-        return $this->hasMany(Wallet::class, 'user_id', 'id');
+        return $this->hasMany(Wallet::class, 'user_id', 'uuid');
     }
 
     /**
@@ -94,7 +94,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getTransactions(): HasMany
     {
-        return $this->hasMany(Transaction::class, 'user_id', 'id');
+        return $this->hasMany(Transaction::class, 'user_id', 'uuid');
     }
 
     /**
@@ -102,6 +102,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getCategories(): HasMany
     {
-        return $this->hasMany(TransactionCategory::class, 'user_id', 'id');
+        return $this->hasMany(TransactionCategory::class, 'user_id', 'uuid');
     }
 }

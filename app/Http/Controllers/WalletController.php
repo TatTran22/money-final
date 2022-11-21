@@ -16,7 +16,7 @@ class WalletController extends Controller
      */
     public function index()
     {
-        $userWallets = Wallet::query()->where('user_id', Auth::id())->get();
+        $userWallets = Auth::user()->getWallets()->get();
         return Inertia::render('Wallets/Wallets', ['userWallets' => $userWallets]);
     }
 
@@ -29,18 +29,14 @@ class WalletController extends Controller
             $data = $request->validate([
                 'name' => ['required', 'string', 'max:40'],
                 'type' => ['required', 'string', 'max:20'],
-                'description' => ['required', 'string', 'max:255'],
                 'amount' => ['required', 'numeric'],
                 'currency' => ['required', 'string', 'max:3', 'min:3'],
             ]);
             $data['user_id'] = Auth::id();
             $data['icon_url'] = $request->input('icon_url');
 
-            $wallet = Wallet::query()->updateOrCreate([
-                'type' => $data['type'],
-                'user_id' => $data['user_id'],
-                'currency' => $data['currency']
-            ], $data);
+            Wallet::create($data);
 
+            return redirect('/wallets');
     }
 }

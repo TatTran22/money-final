@@ -48,6 +48,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-assignment': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
+    'react/no-unknown-property': ['error', { ignore: ['css'] }], //emotion-react
   },
   settings: {
     react: { version: 'detect' },

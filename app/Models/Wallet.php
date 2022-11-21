@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Wallet extends Model
 {
     use HasFactory, HasUuids;
+    public const WALLET_TYPE = [0 => 'BANK', 1 => 'CASH', 2 => 'CREDIT_CARD', 3 => 'LOAN', 4 => 'ASSET', 5 => 'INVESTMENT'];
 
     /**
      * The attributes that are mass assignable.
@@ -28,16 +29,18 @@ class Wallet extends Model
     ];
 
     protected $attributes = [
-        'type' => 'cash',
+        'type' => self::WALLET_TYPE[1],
         'currency' => 'USD',
     ];
+
+    protected $primaryKey = 'uuid';
 
     /**
      * @return BelongsTo
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'uuid');
     }
 
     /**
@@ -45,6 +48,6 @@ class Wallet extends Model
      */
     public function transactions(): HasMany
     {
-        return $this->hasMany(Transaction::class, 'budget_id', 'id');
+        return $this->hasMany(Transaction::class, 'budget_id', 'uuid');
     }
 }

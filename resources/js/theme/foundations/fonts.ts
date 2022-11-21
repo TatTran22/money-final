@@ -1,4 +1,4 @@
 export default {
-  heading: 'InterVariable, -apple-system, system-ui, sans-serif',
-  body: 'InterVariable, -apple-system, system-ui, sans-serif',
+  heading: 'Nunito Sans, sans-serif',
+  body: 'Nunito, sans-serif',
 }
