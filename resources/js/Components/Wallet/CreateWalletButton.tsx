@@ -7,7 +7,7 @@ export default function CreateWalletButton({ onClick }: { onClick: MouseEventHan
     <Button rounded="md" p="2" boxShadow="lg" borderWidth="2px" variant="primary" mb={4} w="full" onClick={onClick}>
       <Center>
         <AddIcon h="30px" mr={2} />
-        Thêm ví
+        Add a wallet
       </Center>
     </Button>
   )

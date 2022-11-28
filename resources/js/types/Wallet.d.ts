@@ -3,7 +3,7 @@ declare type Wallet = {
   name: string
   user_id: string
   currency: string
-  type: string
+  type: 'assets' | 'bank' | 'cash' | 'credit_card' | 'investment'
   description: string | null
   amount: number
   icon_url: string | null

@@ -13,6 +13,7 @@ export default defineConfig({
     react(),
     eslint({
       failOnError: false,
+      failOnWarning: false,
     }),
   ],
   resolve: {

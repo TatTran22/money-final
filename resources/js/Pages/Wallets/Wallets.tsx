@@ -27,7 +27,7 @@ export default function WalletIndex({
     <AuthLayout auth={auth} errors={errors} title="Wallets">
       <Container flex={1} py="2">
         <Flex w="full" h="full">
-          <VStack w="sm" bg="bg-surface" rounded="lg" mr={4} p={2}>
+          <VStack w="xs" bg="bg-surface" rounded="lg" mr={4} p={2}>
             <CreateWalletButton onClick={onOpen} />
             {userWallets.map((wallet, index) => (
               <WalletMiniCard key={index} wallet={wallet} />

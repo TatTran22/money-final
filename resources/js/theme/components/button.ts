@@ -121,6 +121,14 @@ const variants = {
       },
     }
   },
+  solid: () => ({
+    bg: 'brand.400',
+    color: 'white',
+    shadow: 'inset 0 1px 0 0 rgb(255 255 255/.2)',
+    _hover: {
+      bg: 'brand.300',
+    },
+  }),
 }
 
 export default {

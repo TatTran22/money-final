@@ -87,6 +87,7 @@ export default {
   variants,
   sizes,
   defaultProps: {
-    colorScheme: 'gray',
+    colorScheme: 'brand',
+    focusBorderColor: 'brand.200',
   },
 }

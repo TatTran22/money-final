@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Wallet extends Model
 {
     use HasFactory, HasUuids;
-    public const WALLET_TYPE = [0 => 'BANK', 1 => 'CASH', 2 => 'CREDIT_CARD', 3 => 'LOAN', 4 => 'ASSET', 5 => 'INVESTMENT'];
+    public const WALLET_TYPE = [0 => 'bank', 1 => 'cash', 2 => 'credit_card', 3 => 'loan', 4 => 'assets', 5 => 'investment'];
 
     /**
      * The attributes that are mass assignable.

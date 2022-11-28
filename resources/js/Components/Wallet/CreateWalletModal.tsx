@@ -23,27 +23,58 @@ import {
   InputRightElement,
   FormErrorMessage,
   SelectField,
+  Flex,
 } from '@chakra-ui/react'
 import { useEffect, useRef } from 'react'
 import { useForm } from '@inertiajs/inertia-react'
 // import { currencyList } from '@/data/currency'
 import { EditIcon } from '@chakra-ui/icons'
-import SelectCurrencyModal from './SelectCurrencyModal'
 import route from 'ziggy-js'
+import SelectCurrencyModal from './SelectCurrencyModal'
+import { assets, bank, cash, credit_card, investment } from '@/assets/images/wallet-types/color'
 
 export default function CreateWalletModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const initialRef = useRef<HTMLInputElement>(null)
+  const amountInputRef = useRef<HTMLInputElement>(null)
   const descriptionRef = useRef<HTMLTextAreaElement>(null)
   const currencyModal = useDisclosure()
 
-  const { data, setData, post, processing, errors, clearErrors } = useForm({
+  const { data, setData, post, processing, errors, clearErrors, reset } = useForm({
     name: '',
     currency: 'USD',
-    type: 'bank',
+    type: 'cash',
     description: '',
-    amount: 10000,
+    amount: 0,
     icon_url: '',
   })
+
+  const walletType = [
+    {
+      title: 'Assets',
+      value: 'assets',
+      icon: assets,
+    },
+    {
+      title: 'Bank',
+      value: 'bank',
+      icon: bank,
+    },
+    {
+      title: 'Cash',
+      value: 'cash',
+      icon: cash,
+    },
+    {
+      title: 'Credit card',
+      value: 'credit_card',
+      icon: credit_card,
+    },
+    {
+      title: 'Investment',
+      value: 'investment',
+      icon: investment,
+    },
+  ]
 
   const onSaveWallet = () => {
     console.log(data)
@@ -60,6 +91,12 @@ export default function CreateWalletModal({ isOpen, onClose }: { isOpen: boolean
     console.log(errors)
   }, [errors])
 
+  useEffect(() => {
+    clearErrors()
+    reset()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen])
+
   return (
     <>
       <Modal onClose={onClose} isOpen={isOpen} closeOnOverlayClick={false} initialFocusRef={initialRef} size="lg">
@@ -69,23 +106,53 @@ export default function CreateWalletModal({ isOpen, onClose }: { isOpen: boolean
           <ModalCloseButton />
           <ModalBody>
             <VStack>
-              <FormControl isDisabled={processing} isRequired isInvalid={!!errors.name}>
-                <FormLabel>Wallet name</FormLabel>
-                <Input
-                  ref={initialRef}
-                  value={data.name}
-                  onChange={(e) => {
-                    if (errors.name) {
-                      clearErrors('name')
-                    }
-                    setData({
-                      ...data,
-                      name: e.currentTarget.value,
-                    })
-                  }}
-                />
-                {errors.name && <FormErrorMessage>{errors.name}</FormErrorMessage>}
-              </FormControl>
+              <Flex w="full" justify="between" align="center">
+                <FormControl isDisabled={processing} isRequired isInvalid={!!errors.name}>
+                  <FormLabel>Name</FormLabel>
+                  <Input
+                    ref={initialRef}
+                    value={data.name}
+                    onChange={(e) => {
+                      if (errors.name) {
+                        clearErrors('name')
+                      }
+                      setData({
+                        ...data,
+                        name: e.currentTarget.value,
+                      })
+                    }}
+                  />
+                  {errors.name && <FormErrorMessage>{errors.name}</FormErrorMessage>}
+                </FormControl>
+                <FormControl isDisabled={processing} isRequired isInvalid={!!errors.type} p="2" ml={2}>
+                  <FormLabel>Type</FormLabel>
+                  <SelectField
+                    value={data.type}
+                    onChange={(e) => {
+                      console.log(e.currentTarget.value)
+                      if (errors.type) {
+                        clearErrors('type')
+                      }
+                      setData({
+                        ...data,
+                        type: e.currentTarget.value,
+                      })
+                      if (initialRef.current && initialRef.current.value.trim() === '') {
+                        initialRef.current.focus()
+                      } else if (amountInputRef.current) {
+                        amountInputRef.current.focus()
+                      }
+                    }}
+                  >
+                    {walletType.map((type, index) => (
+                      <option key={index} value={type.value}>
+                        {type.title}
+                      </option>
+                    ))}
+                  </SelectField>
+                  {errors.name && <FormErrorMessage>{errors.name}</FormErrorMessage>}
+                </FormControl>
+              </Flex>
               <HStack align="start">
                 <FormControl isDisabled={processing} isInvalid={!!errors.amount}>
                   <FormLabel>
@@ -98,6 +165,8 @@ export default function CreateWalletModal({ isOpen, onClose }: { isOpen: boolean
                   <NumberInput allowMouseWheel min={0}>
                     <NumberInputField
                       value={data.amount}
+                      ref={amountInputRef}
+                      placeholder="0"
                       onChange={(e) => {
                         setData({
                           ...data,

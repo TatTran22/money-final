@@ -67,12 +67,11 @@ const SelectCurrencyModal = ({
                   p={1}
                   rounded="lg"
                   shadow={c.currency_code === selectedCurrency ? 'md' : 'xs'}
-                  color={c.currency_code === selectedCurrency ? 'gray.800' : 'gray.600'}
+                  boxShadow={c.currency_code === selectedCurrency ? 'xl' : 'sm'}
+                  color={c.currency_code === selectedCurrency ? 'brand.50' : 'brand.600'}
                   fontWeight={c.currency_code === selectedCurrency ? 'semibold' : ''}
-                  bgColor={c.currency_code === selectedCurrency ? 'green.200' : ''}
-                  _hover={{ cursor: 'pointer', color: 'gray.800', fontWeight: 'semibold' }}
-                  borderWidth={c.currency_code === selectedCurrency ? 2 : 1}
-                  //   borderRadius="sm"
+                  bgColor={c.currency_code === selectedCurrency ? 'brand.600' : ''}
+                  _hover={{ cursor: 'pointer', fontWeight: 'semibold' }}
                   overflow="hidden"
                   onClick={() => {
                     setInputCurrency(c.currency_code)
@@ -86,7 +85,7 @@ const SelectCurrencyModal = ({
                       h="10"
                     />
                     <Flex direction="column">
-                      <Text>{c.currency_name}</Text>
+                      <Text fontSize="sm">{c.currency_name}</Text>
                       <Text fontWeight="semibold">{`${c.currency_code} - ${c.currency_symbol}`}</Text>
                     </Flex>
                   </HStack>
